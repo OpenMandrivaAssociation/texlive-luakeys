@@ -1,5 +1,5 @@
 Name:		texlive-luakeys
-Version:	63833
+Version:	65346
 Release:	1
 Summary:	A Lua module for parsing key-value options
 Group:		Publishing
