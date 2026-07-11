@@ -1,41 +1,25 @@
-Name:		texlive-luakeys
-Version:	72484
-Release:	1
+%global tl_name luakeys
+%global tl_revision 78101
+
+Name:		texlive-%{tl_name}
+Epoch:		1
+Version:	0.17.0
+Release:	%{tl_revision}.1
 Summary:	A Lua module for parsing key-value options
 Group:		Publishing
-URL:		https://www.ctan.org/tex-archive/macros/latex/contrib/luakeys
+URL:		https://www.ctan.org/tex-archive/macros/luatex/generic/luakeys
 License:	lppl1.3c
-Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/luakeys.r%{version}.tar.xz
-Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/luakeys.doc.r%{version}.tar.xz
+Source0:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/luakeys.r%{tl_revision}.tar.xz
+Source1:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/luakeys.doc.r%{tl_revision}.tar.xz
 BuildArch:	noarch
-BuildRequires:	texlive-tlpkg
-Requires(pre):	texlive-tlpkg
-Requires(post):	texlive-kpathsea
+BuildSystem:	texlive
+Provides:	texlive(%{tl_name}) = %{tl_revision}
 
 %description
-This package provides a Lua module that can parse key-value
-options like the TeX packages keyval, kvsetkeys, kvoptions,
-xkeyval, pgfkeys etc. luakeys, however, accomplishes this task
-entirely by using the Lua language and does not rely on TeX.
-Therefore this package can only be used with the TeX engine
-LuaTeX. Since luakeys uses LPeg, the parsing mechanism should
-be pretty robust.
+This package provides a Lua module that can parse key-value options like
+the TeX packages keyval, kvsetkeys, kvoptions, xkeyval, pgfkeys etc.
+luakeys, however, accomplishes this task entirely by using the Lua
+language and does not rely on TeX. Therefore this package can only be
+used with the TeX engine LuaTeX. Since luakeys uses LPeg, the parsing
+mechanism should be pretty robust.
 
-%prep
-%autosetup -p1 -c -a1
-
-%build
-
-%install
-rm -rf tlpkg
-mkdir -p %{buildroot}%{_texmfdistdir}
-cp -a * %{buildroot}%{_texmfdistdir}
-
-%files
-%{_texmfdistdir}/tex/luatex/luakeys
-%doc %{_texmfdistdir}/doc/luatex/luakeys
-
-%post -p %{_sbindir}/texlive.post
-
-%postun
-[ "$1" -eq 0 ] && %{_sbindir}/texlive.post
